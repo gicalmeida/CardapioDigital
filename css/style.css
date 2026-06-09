@@ -1,3 +1,29 @@
+/* --- CONFIGURAÇÃO DE TEMAS (VARIÁVEIS) --- */
+:root {
+  /* Modo Claro Original */
+  --cor-fundo: #f5f1ec;
+  --cor-texto: #5a3b2d;
+  --cor-topo: #efe7de;
+  --cor-card: #ffffff;
+  --cor-botao: #c89b6d;
+  --cor-botao-hover: #b88657;
+  --cor-preco: #b67b47;
+  --cor-borda-input: #ccc;
+}
+
+body.dark-theme {
+  /* Modo Escuro - Chocolate & Caramelo Premium */
+  --cor-fundo: #1F110B;        /* 60% Fundo Cacau Profundo */
+  --cor-topo: #140A07;         /* Topo ligeiramente mais escuro */
+  --cor-texto: #F4EAE1;        /* Texto Creme Claro para leitura confortável */
+  --cor-card: #361F15;         /* 30% Cards Chocolate Meio Amargo */
+  --cor-botao: #D4A373;        /* 10% Destaques em Caramelo Dourado */
+  --cor-botao-hover: #C59262;  /* Caramelo um pouco mais escuro para o hover */
+  --cor-preco: #E6A15C;        /* Preço em Caramelo Iluminado */
+  --cor-borda-input: #4A2B1E;
+}
+
+/* --- REGRAS GERAIS --- */
 * {
   margin: 0;
   padding: 0;
@@ -6,8 +32,9 @@
 }
 
 body {
-  background-color: #f5f1ec;
-  color: #5a3b2d;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -17,17 +44,16 @@ body {
   padding: 20px 0;
 }
 
-/* TOPO */
+/* --- TOPO E CONTROLES --- */
 .topo {
   width: 100%;
-  background-color: #efe7de;
+  background-color: var(--cor-topo);
   padding: 15px 5%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
 }
 
 .logo-area {
@@ -54,8 +80,14 @@ body {
   font-size: 1.4rem;
 }
 
+.controles-topo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .login-btn {
-  background-color: #c89b6d;
+  background-color: var(--cor-botao);
   color: white;
   border: none;
   padding: 10px 18px;
@@ -65,10 +97,58 @@ body {
 }
 
 .login-btn:hover {
-  background-color: #b88657;
+  background-color: var(--cor-botao-hover);
 }
 
-/* PESQUISA */
+/* --- SWITCH MODO ESCURO --- */
+.switch-dark {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch-dark input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "☀️";
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #FF4081;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+  content: "🌙";
+}
+
+/* --- PESQUISA --- */
 .pesquisa-area {
   margin: 20px 0;
 }
@@ -76,14 +156,16 @@ body {
 .pesquisa-area input {
   width: 100%;
   padding: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--cor-borda-input);
+  background-color: var(--cor-card);
+  color: var(--cor-texto);
   border-radius: 10px;
   outline: none;
   font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* BANNER */
-/* CARROSSEL */
+/* --- CARROSSEL --- */
 .carrossel {
   position: relative;
   width: 100%;
@@ -122,14 +204,11 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   text-align: center;
   color: white;
-
   background-color: rgba(0,0,0,0.4);
   padding: 24px;
   border-radius: 14px;
-
   width: 80%;
   max-width: 500px;
 }
@@ -147,19 +226,14 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-
   width: 45px;
   height: 45px;
-
   border: none;
   border-radius: 50%;
-
   background-color: rgba(255,255,255,0.8);
   cursor: pointer;
-
   font-size: 1.2rem;
   z-index: 2;
-
   transition: 0.3s;
 }
 
@@ -167,20 +241,14 @@ body {
   background-color: white;
 }
 
-.esquerda {
-  left: 15px;
-}
-
-.direita {
-  right: 15px;
-}
+.esquerda { left: 15px; }
+.direita { right: 15px; }
 
 .indicadores {
   position: absolute;
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
-
   display: flex;
   gap: 10px;
   z-index: 2;
@@ -197,8 +265,8 @@ body {
   background-color: white;
 }
 
-/* CATEGORIAS */
-.filtros {
+/* --- FILTROS (CATEGORIAS E PREÇOS) --- */
+.filtros, .filtros-preco {
   display: flex;
   flex-wrap: wrap;
   gap: 14px 12px;
@@ -206,52 +274,24 @@ body {
   padding: 6px 0;
 }
 
-.filtro {
-  border: 1px solid #c89b6d;
-  background-color: white;
-  color: #5a3b2d;
-
+.filtro, .filtro-preco {
+  border: 1px solid var(--cor-botao);
+  background-color: var(--cor-card);
+  color: var(--cor-texto);
   padding: 10px 18px;
   border-radius: 20px;
-
   cursor: pointer;
   transition: 0.3s;
 }
 
-.filtro:hover,
-.filtro.ativo {
-  background-color: #c89b6d;
+.filtro:hover, .filtro.ativo,
+.filtro-preco:hover, .filtro-preco.ativo {
+  background-color: var(--cor-botao);
   color: white;
+  border-color: var(--cor-botao);
 }
 
-/* CATEGORIAS DE FILTROS DE PREÇO*/
-.filtros-preco {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px 12px;
-  margin-bottom: 25px;
-  padding: 6px 0;
-}
-
-.filtro-preco {
-  border: 1px solid #c89b6d;
-  background-color: white;
-  color: #5a3b2d;
-
-  padding: 10px 18px;
-  border-radius: 20px;
-
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.filtro-preco:hover,
-.filtro-preco.ativo {
-  background-color: #c89b6d;
-  color: white;
-}
-
-/* PRODUTOS */
+/* --- PRODUTOS --- */
 .produtos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
@@ -260,14 +300,15 @@ body {
 }
 
 .card-produto {
-  background-color: white;
+  background-color: var(--cor-card);
+  color: var(--cor-texto);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   max-width: 280px;
   width: 100%;
   margin: 0 auto;
-  transition: 0.3s;
+  transition: transform 0.3s, background-color 0.3s;
 }
 
 .card-produto:hover {
@@ -296,13 +337,12 @@ body {
 }
 
 .info-produto span {
-  color: #b67b47;
+  color: var(--cor-preco);
   font-weight: bold;
 }
 
-/* RESPONSIVIDADE */
+/* --- RESPONSIVIDADE EM TELAS MENORES --- */
 @media (max-width: 768px) {
-
   .topo {
     flex-direction: column;
     gap: 15px;
@@ -313,13 +353,8 @@ body {
     height: 200px;
   }
 
-  .texto-banner h2 {
-    font-size: 1.4rem;
-  }
-
-  .texto-banner p {
-    font-size: 0.9rem;
-  }
+  .texto-banner h2 { font-size: 1.4rem; }
+  .texto-banner p { font-size: 0.9rem; }
 
   .produtos {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -327,30 +362,48 @@ body {
 }
 
 @media (max-width: 480px) {
+  .logo-area h1 { font-size: 1.1rem; }
+  .banner-conteudo { height: 170px; }
+  .texto-banner { width: 85%; padding: 12px; }
+  .texto-banner h2 { font-size: 1rem; }
+  .filtros, .filtros-preco { justify-content: center; }
+}
 
-  .logo-area h1 {
-    font-size: 1.1rem;
-  }
+/* --- CONFIGURAÇÕES EXCLUSIVAS PARA EXPORTAÇÃO DO PDF --- */
+body.modo-pdf {
+  /* Força cores claras no papel para economizar tinta do cliente */
+  --cor-fundo: #faf6f0 !important;
+  --cor-texto: #4a3728 !important;
+  --cor-card: #ffffff !important;
+  --cor-preco: #b58253 !important;
+  --cor-topo: #efe7de !important;
+  background-color: #faf6f0 !important;
+  color: #4a3728 !important;
+}
 
-  .banner-conteudo {
-    height: 170px;
-  }
+/* Oculta elementos desnecessários no catálogo em PDF */
+body.modo-pdf .pesquisa-area,
+body.modo-pdf .carrossel,
+body.modo-pdf .filtros,
+body.modo-pdf .filtros-preco,
+body.modo-pdf .login-btn,
+body.modo-pdf .switch-dark {
+  display: none !important;
+}
 
-  .texto-banner {
-    width: 85%;
-    padding: 12px;
-  }
+/* Impede cortes de cards entre páginas do PDF */
+body.modo-pdf .card-produto {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+  border: 1px solid #e6dfd5 !important;
+}
 
-  .texto-banner h2 {
-    font-size: 1rem;
-  }
-
-  .categorias {
-    justify-content: center;
-  }
-
-  .categoria {
-    font-size: 0.9rem;
-    padding: 8px 14px;
-  }
+/* Força alinhamento em 3 colunas perfeitas no formato A4 */
+body.modo-pdf .produtos {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
+  width: 100% !important;
 }

@@ -11,24 +11,27 @@
   <header class="topo">
     <div class="logo-area">
       <div class="logo-img">
-        <!-- Coloque a imagem da logo aqui -->
         <img src="images/logo.jpeg" alt="Logo da confeitaria">
       </div>
 
       <h1>Cantinho Doces da Cris</h1>
     </div>
-
-    <button class="login-btn">PDF</button>
+<div class="controles-topo">
+    <label class="switch-dark">
+      <input type="checkbox" id="dark-mode-toggle">
+      <span class="slider"></span>
+    </label>
+    
+    <button class="login-btn" onclick="gerarPDF()">PDF</button>
+  </div>
   </header>
 
   <main class="container">
 
-    <!-- Barra de pesquisa -->
     <section class="pesquisa-area">
       <input type="text" placeholder="Buscar produto..." class="busca">
     </section>
 
-    <!-- Carrossel -->
     <section class="carrossel">
 
     <div class="slides">
@@ -73,7 +76,6 @@
 
     </section>
 
-    <!-- Filtros -->
 <section class="filtros">
   <button class="filtro" data-filtro="todos">Todos</button>
   <button class="filtro" data-filtro="sem-chocolate">Sem chocolate</button>
@@ -90,7 +92,6 @@
   <button class="filtro-preco" data-preco="caro">Acima de R$80</button>
 </section>
 
-    <!-- Produtos -->
     <section class="produtos">
 
       <div class="card-produto">
@@ -185,5 +186,6 @@
   </main>
 
   <script src="./js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>

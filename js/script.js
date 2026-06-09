@@ -1,4 +1,3 @@
-//Carrossel
 const slides = document.querySelectorAll('.slide');
 const bolinhas = document.querySelectorAll('.bolinha');
 
@@ -41,7 +40,6 @@ setInterval(() => {
     proximoSlide();
 }, 5000);
 
-// Filtros 
 
 const botoes = document.querySelectorAll(".filtro");
 const cards = document.querySelectorAll(".card-produto");
@@ -56,17 +54,14 @@ botoes.forEach(botao => {
 
       const info = card.querySelector(".info-produto");
 
-      // mostra todos
       if (filtro === "todos") {
         card.style.display = "block";
       }
 
-      // mostra os que tem a classe
       else if (info.classList.contains(filtro)) {
         card.style.display = "block";
       }
 
-      // esconde o que não tem classe 
       else {
         card.style.display = "none";
       }
@@ -77,7 +72,6 @@ botoes.forEach(botao => {
 
 });
 
-// barra de pesquisa
 const busca = document.querySelector(".busca");
 
 
@@ -92,7 +86,6 @@ busca.addEventListener("input", () => {
       .textContent
       .toLowerCase();
 
-    // verifica se o nome tem o texto digitado
     if (nomeProduto.includes(texto)) {
       card.style.display = "block";
     } else {
@@ -103,7 +96,6 @@ busca.addEventListener("input", () => {
 
 });
 
-// Filtros de preços
 
 const botoesPreco = document.querySelectorAll(".filtro-preco");
 
@@ -133,4 +125,40 @@ botoesPreco.forEach(botao => {
 
   });
 
+});
+function gerarPDF() {
+  document.body.classList.add("modo-pdf");
+
+  const elemento = document.body;
+
+  const opcoes = {
+    margin:       [15, 12, 15, 12], 
+    filename:     'Catalogo_Doces_da_Cris.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, useCORS: true },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opcoes).from(elemento).save().then(() => {
+    document.body.classList.remove("modo-pdf");
+  });
+}
+
+// --- CÓDIGO DO MODO ESCURO ---
+const modoEscuroToggle = document.getElementById('dark-mode-toggle');
+
+// Verifica se o usuário já tinha escolhido o modo escuro antes
+if (localStorage.getItem('tema') === 'dark') {
+  document.body.classList.add('dark-theme');
+  modoEscuroToggle.checked = true;
+}
+
+modoEscuroToggle.addEventListener('change', () => {
+  if (modoEscuroToggle.checked) {
+    document.body.classList.add('dark-theme');
+    localStorage.setItem('tema', 'dark'); // Salva a escolha
+  } else {
+    document.body.classList.remove('dark-theme');
+    localStorage.setItem('tema', 'light'); // Salva a escolha
+  }
 });
