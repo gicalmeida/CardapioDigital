@@ -126,22 +126,44 @@ botoesPreco.forEach(botao => {
   });
 
 });
+
 function gerarPDF() {
   document.body.classList.add("modo-pdf");
 
   const elemento = document.body;
 
   const opcoes = {
-    margin:       [15, 12, 15, 12], 
-    filename:     'Catalogo_Doces_da_Cris.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, useCORS: true },
-    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    margin: [10, 10, 10, 10],
+    filename: 'Catalogo_Doces_da_Cris.pdf',
+
+    image: {
+      type: 'jpeg',
+      quality: 0.98
+    },
+
+    html2canvas: {
+      scale: 2,
+      useCORS: true
+    },
+
+    pagebreak: {
+      mode: ['css', 'legacy']
+    },
+    
+    jsPDF: {
+      unit: 'mm',
+      format: 'a4',
+      orientation: 'portrait'
+    }
   };
 
-  html2pdf().set(opcoes).from(elemento).save().then(() => {
-    document.body.classList.remove("modo-pdf");
-  });
+  html2pdf()
+    .set(opcoes)
+    .from(elemento)
+    .save()
+    .then(() => {
+      document.body.classList.remove("modo-pdf");
+    });
 }
 
 // --- CÓDIGO DO MODO ESCURO ---

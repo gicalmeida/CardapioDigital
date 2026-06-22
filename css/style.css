@@ -391,19 +391,75 @@ body.modo-pdf .switch-dark {
   display: none !important;
 }
 
-/* Impede cortes de cards entre páginas do PDF */
-body.modo-pdf .card-produto {
-  page-break-inside: avoid;
-  break-inside: avoid;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
-  border: 1px solid #e6dfd5 !important;
-}
 
-/* Força alinhamento em 3 colunas perfeitas no formato A4 */
+
 body.modo-pdf .produtos {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 20px !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 15px !important;
+  align-items: start !important;
+}
+
+body.modo-pdf .card-produto {
   width: 100% !important;
+  max-width: none !important;
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+body.modo-pdf .imagem-produto {
+  height: 180px !important;
+}
+
+body.modo-pdf .imagem-produto img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+body.modo-pdf .imagem-produto {
+  height: 140px !important;
+}
+
+body.modo-pdf .info-produto {
+  padding: 10px !important;
+}
+
+body.modo-pdf .info-produto h3 {
+  font-size: 14px !important;
+}
+
+body.modo-pdf .info-produto span {
+  font-size: 12px !important;
+}
+
+body.modo-pdf .produtos {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+}
+
+body.modo-pdf .card-produto {
+  width: 48% !important;
+  margin-bottom: 20px !important;
+
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+
+  border: 1px solid #e6dfd5 !important;
+  box-shadow: none !important;
+}
+
+body.modo-pdf .imagem-produto {
+  width: 100% !important;
+  height: 220px !important;
+  overflow: hidden !important;
+}
+
+body.modo-pdf .imagem-produto img {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  display: block !important;
 }
